@@ -1,0 +1,81 @@
+.search-box{
+	position: relative;
+}
+.autocomplete-results{
+	position: absolute;
+	width: 100%;
+	border-radius: 0
+}
+.autocomplete-results  .selected{
+	background: #000;
+}
+
+.custom-autocomplete{
+	background: #fff;
+	border:1px solid #258dc8;
+	padding: 5px 0 0 0;
+	margin: 0;
+}
+.custom-autocomplete .item{
+	list-style-type: none;
+	padding: 5px;	
+	border-bottom:1px solid #e7e7e7;
+}
+.custom-autocomplete .item.selected{
+	background: #258dc8; /* Old browsers */
+	background: -moz-linear-gradient(top,  #258dc8 0%, #258dc8 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#258dc8), color-stop(100%,#258dc8)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #258dc8 0%,#258dc8 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #258dc8 0%,#258dc8 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #258dc8 0%,#258dc8 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  #258dc8 0%,#258dc8 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#258dc8', endColorstr='#258dc8',GradientType=0 ); /* IE6-9 */
+}
+.custom-autocomplete .item:after{
+	content:"";
+	display: block;
+	clear: both;
+}
+.custom-autocomplete .item a{
+	padding: 5px
+}
+.custom-autocomplete .item p{
+	padding: 3px 5px
+}
+.custom-autocomplete .item.selected a{
+	color:#fff;
+	
+}
+.custom-autocomplete .item .title_content{
+	float: left;
+}
+.custom-autocomplete .item img{
+	float: left;
+	width:55px;
+	height: 55px;
+	border-radius: 3px;
+	overflow: hidden;
+	border:1px solid #258dc8;
+	background: #fff;
+}
+.form-group{
+	position: relative;
+}
+
+.custom-autocomplete .show-more-button{
+	list-style-type: none;
+	padding: 10px;
+	text-align: center;
+	background: #eeeeee; /* Old browsers */
+	background: -moz-linear-gradient(top,  #eeeeee 0%, #cccccc 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eeeeee), color-stop(100%,#cccccc)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #eeeeee 0%,#cccccc 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #eeeeee 0%,#cccccc 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #eeeeee 0%,#cccccc 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  #eeeeee 0%,#cccccc 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#cccccc',GradientType=0 ); /* IE6-9 */
+
+}
+.custom-autocomplete .show-more-button a{
+	color:#6B6B6B;
+}

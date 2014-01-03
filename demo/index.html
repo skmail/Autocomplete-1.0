@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+        <meta charset="utf-8">
+        <title>Autocomplete</title>
+		<link href="style.css" media="screen" rel="stylesheet" type="text/css">
+		<link href="bootstrap/css/bootstrap.min.css" media="screen" rel="stylesheet" type="text/css">
+		<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+		<script src="bootstrap/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="../src/jquery.autocomplete.min.js"></script>
+		<script type="text/javascript" src="application.js"></script>
+    <body>
+    <div class="container">
+
+<div class="page-header">
+  <h1>Autocomplete
+
+  <div class="pull-right">
+  	<a href="https://github.com/skmail/autocomplete" class="btn btn-success">Download</a>
+  </div>
+  </h1>
+</div>
+		<h2>Demo 1 <small>Bootstrap 3 implementation</small></h2>
+		<div class="panel panel-default">
+			<div class="panel-body">
+				  <div class="form-group">
+				    <input type="text" class="form-control demo1" placeholder="type PHP,MYSQL,jQuery..">
+				  </div>
+		  	</div>
+<div class="panel-footer">
+<pre>
+$(function(){
+    $('.demo1').autocomplete({
+        url:'data.php',
+        containerSelectorClass:'list-group',
+        itemSelectorClass:'list-group-item',
+        containerElementName:'div',
+        itemElementName:'a',     
+        selectedClass:'active',
+        renderResultItem:function(item,parentObject){
+            parentObject.attr('href','#');
+            return  item;
+        }
+    });
+});
+</pre>
+</div>
+</div>
+	
+
+
+	<h2>Demo 2 <small>Search Form submission</small></h2>
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<form>
+					<div class="input-group">
+						<input type="text" class="form-control  demo2" autocomplete="off" name="q" placeholder="type PHP,MYSQL,jQuery..">
+						<span class="input-group-btn">
+							<button class="btn btn-default" type="submit">Search</button>
+						</span>
+					</div>
+				</form>
+		  	</div>
+<div class="panel-footer">
+<pre>
+$('.demo2').autocomplete({
+    url:'data.php',
+    containerSelectorClass:'list-group',
+    itemSelectorClass:'list-group-item',
+    containerElementName:'div',
+    selectedClass:'active',
+    renderResultItem:function(item,parentObject){
+        parentObject.attr('href','#');
+        return  item;
+    },
+    onEnter:function(selectedObject,options,event){
+        event.preventDefault();
+        if(selectedObject !== null){
+            options.inputBox.val(selectedObject.text());
+        }
+        options.inputBox.closest('form').submit();
+    }
+}); 
+</pre>
+</div>
+</div>
+
+
+		<h2>Demo 3 <small>Custom implementation</small></h2>
+		<div class="panel panel-default">
+			<div class="panel-body">
+				  <div class="form-group">
+				    <input type="text" class="form-control demo3" placeholder="type PHP,MYSQL,jQuery..">
+				  </div>
+		  	</div>
+<div class="panel-footer">
+<pre>
+$('.demo3').autocomplete({
+    url:'data2.php',
+    containerSelectorClass:'custom-autocomplete',
+    itemSelectorClass:'item',
+    containerElementName:'ul',
+    itemElementName:'li',
+    showMoreButton:true,
+    showMoreButtonUrl:'#moreResults-{{keyword}}', 
+    renderResultItem:function(item,parentObject){
+        html = '';
+        html+='&lt;img src=&quot;'+item.image+'&quot;/&gt;';
+        html+='&lt;div class=&quot;title_content&quot;&gt;';
+        html+='&lt;a href=&quot;profile.php?id'+item.id+'&quot;&gt;'+item.title+'&lt;/a&gt;';
+        html+='&lt;p&gt;'+item.content+'&lt;/p&gt;'; html+=&quot;&lt;/div&gt;&quot;
+        return  html;
+    },
+    onEnter:function(selectedObject,options,event){
+        event.preventDefault();
+        if(selectedObject !== null){
+            options.inputBox.val(selectedObject.find('a').text());
+        }
+        options.inputBox.closest('form').submit();
+    },
+    onMouseSelect:function(selectedObject,options,event){
+        options.onEnter(selectedObject,options,event);
+    }
+}); 
+</pre>
+</div>
+</div>
+
+
+
+
+		<h2>Options</h2>
+		<table class="table table-bordered table-striped">
+	        <thead>
+	          <tr>
+	            <th width="15%">Option</th>
+	            <th width="15%">Default Value</th>
+	            <th>Description</th>
+	          </tr>
+	        </thead>
+	        <tbody>
+				<tr>
+					<td>url</td>
+					<td><code>null</code></td>
+					<td>URL to autocomplete results</td>
+				</tr>
+				<tr>
+					<td>ajaxRequestMethod</td>
+					<td><code>get</code></td>
+					<td>Ajax request method or type can accept 'get' or 'post'  as string</td>
+				</tr>
+				<tr>
+		            <td>startOnChar</td>
+		            <td><code>3</code></td>
+		            <td>Run autocomplete after a number of entered characters in the search input</td>
+	          	</tr>
+				<tr>
+		            <td>containerElementName</td>
+		            <td><code>'ul'</code></td>
+		            <td>The container element name, it can be 'ul','div','dl'</td>
+	          	</tr>
+				<tr>
+		            <td>containerMainSelectorClass</td>
+		            <td><code>'autocomplete-results'</code></td>
+		            <td>A custom class selector for the results list container(don't prefix '.'  to the selector ) we recommend to leave it without change</td>
+	          	</tr>
+	          	<tr>
+		            <td>containerSelectorClass</td>
+		            <td><code>null</code></td>
+		            <td>Additional css classes to the results container</td>
+	          	</tr>
+				<tr>
+		            <td>itemElementName</td>
+		            <td><code>'li'</code></td>
+		            <td>The element name of item list</td>
+	          	</tr>
+				<tr>
+		            <td>selectedClass</td>
+		            <td><code>null</code></td>
+		            <td>Additional CSS Class to the selected item </td>
+	          	</tr>
+				<tr>
+		            <td>showMoreButton</td>
+		            <td><code>false</code></td>
+		            <td>Show more results button at the bottom of the results list</td>
+	          	</tr>
+				<tr>
+		            <td>showMoreButtonLabel</td>
+		            <td><code>'Show More Results'</code></td>
+		            <td>Text label for More results button </td>
+	          	</tr>
+				<tr>
+		            <td>showMoreButtonUrl</td>
+		            <td><code>{{keyword}}</code></td>
+		            <td>The url for the full results list, use '{{keyword}}' placeholder to add the keyword to the url</td>
+	          	</tr>
+
+	        </tbody>
+      	</table>
+      	<h2>Methods/Callbacks</h2>
+		<table class="table table-bordered table-striped">
+	        <thead>
+	          <tr>
+	            <th width="15%">callback</th>
+	            <th width="15%">Parameters</th>
+	            <th>Description</th>
+	          </tr>
+	        </thead>
+	        <tbody>
+				<tr>
+					<td>renderResultItem</td>
+					<td><code>item,parentObject</code></td>
+					<td>Render item before append it to the list, <b>item</b> parameter is a row of the results loop, either it's string value or object</td>
+				</tr>
+				<tr>
+					<td>onMouseSelect</td>
+					<td><code>selectedObject,options,event</code></td>
+					<td>Select an item fro the list by mouse </td>
+				</tr>
+				<tr>
+					<td>onEnter</td>
+					<td><code>selectedObject,options,event</code></td>
+					<td>Select an item fro the list by click on enter </td>
+				</tr>
+          	</tbody>
+      	</table>
+	</div>
+    </body>
+</html>
